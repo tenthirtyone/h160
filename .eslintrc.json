@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": [
       "eslint:recommended",
@@ -23,6 +24,7 @@
         "react"
     ],
     "rules": {
-      "indent": ["error", 2]
+      "indent": ["error", 2],
+      "semi": ["error", "always"]
     }
 }

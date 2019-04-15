@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import QRCode from'qrcode.react';
 import PropTypes from 'prop-types';
 import './AddressInfo.scss';
@@ -8,7 +8,7 @@ export default class AddressInfo extends Component {
     super(props);
     this.state = {
       qrSize: 150
-    }
+    };
   }  
   render() {             
     if (this.props.hasAddressData) {
@@ -50,7 +50,7 @@ export default class AddressInfo extends Component {
             </table>
           </div>
         </div>
-      )
+      );
     } else {
       return null;
     }     
@@ -65,4 +65,4 @@ AddressInfo.propTypes = {
   n_tx: PropTypes.number,
   total_received: PropTypes.number,
   total_sent: PropTypes.number,
-}
+};

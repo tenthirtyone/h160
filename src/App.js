@@ -27,7 +27,7 @@ class App extends Component {
       hasAddressData: false,
       error: false,
       ws: null
-    }
+    };
   }
 
   onSearch = async (address) => {    
@@ -43,7 +43,7 @@ class App extends Component {
     });
 
     this.getAddressTxs();
-    this.listenForTx()
+    this.listenForTx();
   }
 
   getAddressTxs = async () => {
@@ -53,7 +53,7 @@ class App extends Component {
     try {
       const endpoint = `${this.state.address}?cors=true&limit=${this.state.pageSize}&offset=${this.state.offset}`;
       response = await fetch(`${addressAPI}${endpoint}`);
-      json = await response.json()
+      json = await response.json();
     } catch (e) {                              
       return this.setState({
         address: "",
@@ -61,7 +61,7 @@ class App extends Component {
         hasAddressData: false,
         error: true,
         txs: []
-      })
+      });
     }        
     
     if (this.state.txs) {
@@ -79,39 +79,39 @@ class App extends Component {
   getMoreTx = async () => {
     await this.setState({
       offset: this.state.offset + this.state.pageSize
-    }) 
+    }); 
     
     if (this.state.offset <= this.state.n_tx - this.state.pageSize) {      
       this.getAddressTxs();
       this.setState({
         pageIsLoaded: false
-      })
+      });
     }    
   }
 
   addTransaction = (tx) => {
     this.setState(state => {
-      const txs = state.txs
+      const txs = state.txs;
       txs.unshift(tx);
       return {
         txs
-      }
-    })    
+      };
+    });    
   }
 
   listenForTx() {
     if (this.state.ws) {
-      this.state.ws.close()      
+      this.state.ws.close();      
     }
-    const ws = new WebSocket(socketAPI)
+    const ws = new WebSocket(socketAPI);
 
-    ws.onopen = (socket) => {    
-      ws.send(`{"op":"ping"}`)      
+    ws.onopen = () => {    
+      ws.send(`{"op":"ping"}`);      
       ws.send(`{
         "op":"addr_sub", 
         "addr":"${this.state.address}"
-      }`)
-    }
+      }`);
+    };
 
     ws.onmessage = event => {      
       let { data } = event;      
@@ -123,12 +123,12 @@ class App extends Component {
             
       this.setState({
         offset: this.state.offset + 1
-      })  
-    }    
+      });  
+    };    
 
     this.setState({
       ws
-    })
+    });
   }
 
   render() {

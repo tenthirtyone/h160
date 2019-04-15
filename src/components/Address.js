@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import AddressInfo from './AddressInfo';
 import TxList from './TxList';
 import PropTypes from 'prop-types';
@@ -32,7 +32,7 @@ export default class Address extends Component {
               txs={this.props.txs}/>
 
           </div>                
-        </main>)   
+        </main>);   
     } else {
       return null;
     }         
@@ -51,7 +51,7 @@ function Spinner({ pageIsLoaded }) {
     return (
       <div className="spinner-box">                       
         <div className="spinner"></div>
-      </div>)
+      </div>);
   }
   return null;
 }
@@ -71,12 +71,12 @@ Address.propTypes = {
   hasMoreTx: PropTypes.bool,
   txs: PropTypes.array,
   didError: PropTypes.bool
-}
+};
 
 ErrorMsg.propTypes = {
   didError: PropTypes.bool
-}
+};
 
 Spinner.propTypes = {
   pageIsLoaded: PropTypes.bool
-}
+};

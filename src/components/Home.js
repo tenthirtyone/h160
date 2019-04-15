@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import './Home.scss'
-import SearchBox from './SearchBox'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import './Home.scss';
+import SearchBox from './SearchBox';
+import PropTypes from 'prop-types';
 
 export default class Home extends Component {
   render() {
@@ -16,7 +16,7 @@ export default class Home extends Component {
               placeholderText="Enter a Bitcoin Address"/>
           </div>                
         </main>
-      )
+      );
     } else {
       return null;
     }        
@@ -26,4 +26,4 @@ export default class Home extends Component {
 Home.propTypes = {
   isHome: PropTypes.bool,
   onSearch: PropTypes.func
-}
+};

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import SearchBox from './SearchBox.js'
+import React, { Component } from 'react';
+import SearchBox from './SearchBox.js';
 import PropTypes from 'prop-types';
-import './Header.scss'
+import './Header.scss';
 
 export default class Header extends Component {
   render() {
@@ -15,10 +15,10 @@ export default class Header extends Component {
             onSearch={this.props.onSearch}
             placeholderText="Enter a Bitcoin Address"/>
         </div>                
-      </header>)
+      </header>);
   }
 }
 
 Header.propTypes = {
   onSearch: PropTypes.func,    
-}
+};

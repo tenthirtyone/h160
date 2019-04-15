@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './Footer.scss';
 
 export default class Footer extends Component {
@@ -9,6 +9,6 @@ export default class Footer extends Component {
           <span>Alex Sherbuck 15-APRIL-2019</span>
         </div>                
       </footer>
-    )
+    );
   }
 }
