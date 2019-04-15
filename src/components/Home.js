@@ -4,7 +4,6 @@ import SearchBox from './SearchBox'
 import PropTypes from 'prop-types'
 
 export default class Home extends Component {
-
   render() {
     if (this.props.isHome) {
       return (

@@ -4,21 +4,17 @@ import PropTypes from 'prop-types';
 import './Header.scss'
 
 export default class Header extends Component {
-
   render() {
     return (
       <header className="Header">                
-        <div className="container">
-                    
+        <div className="container">                   
           <span>
-                        H160
-          </span>
-                    
+            H160
+          </span>                    
           <SearchBox 
             onSearch={this.props.onSearch}
             placeholderText="Enter a Bitcoin Address"/>
-        </div>
-                
+        </div>                
       </header>)
   }
 }

@@ -35,7 +35,6 @@ function MoreTx({ hasMoreTx, getMoreTx })  {
   }
 }
 
-
 TxList.propTypes = {
   txs: PropTypes.array,
   hasMoreTx: PropTypes.bool,

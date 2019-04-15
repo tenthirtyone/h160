@@ -8,12 +8,12 @@ export default class SearchBox extends Component {
   
   handleKeyUp = (e) => {
     if (e.keyCode === 13) {
-      this.handleSearchClick()
+      this.handleSearch()
       this.input.value = '';
     }
   }
 
-  handleSearchClick = () => {
+  handleSearch = () => {
     this.props.onSearch(this.getInputValue());
   }
 

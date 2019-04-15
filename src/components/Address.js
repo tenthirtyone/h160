@@ -9,7 +9,7 @@ export default class Address extends Component {
     if (this.props.isAddress) {                        
       return (                        
         <main className="Address">                            
-          <Error 
+          <ErrorMsg 
             didError={this.props.error}
             address={this.props.address}/>
           <div className="container">                    
@@ -39,7 +39,7 @@ export default class Address extends Component {
   }
 }
 
-function Error({ didError }) {    
+function ErrorMsg({ didError }) {    
   if (didError) {
     return (<div className="error">Error, API Fetch Failed.</div>);
   }
@@ -55,7 +55,6 @@ function Spinner({ pageIsLoaded }) {
   }
   return null;
 }
-
 
 Address.propTypes = {
   isAddress: PropTypes.bool,
@@ -74,7 +73,7 @@ Address.propTypes = {
   didError: PropTypes.bool
 }
 
-Error.propTypes = {
+ErrorMsg.propTypes = {
   didError: PropTypes.bool
 }
 

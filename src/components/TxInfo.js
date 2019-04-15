@@ -20,7 +20,6 @@ export default class TxInfo extends Component {
         display: 'hidden'
       })
     }
-    
   }
 
   render() {

@@ -111,10 +111,6 @@ class App extends Component {
       });      
     }
 
-    ws.onerror = () => {
-      // Fail silently on socket error      
-    }
-
     ws.onmessage = tx => {
       const { x } = tx;
       this.addTransaction(x);
