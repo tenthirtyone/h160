@@ -94,9 +94,31 @@ class App extends Component {
       const txs = state.txs;
       txs.unshift(tx);
       return {
-        txs
+        txs,
+        n_tx: this.state.n_tx + 1
       };
     });    
+    this.updateBalances(tx);
+  }
+
+  updateBalances(tx) {    
+    tx.inputs.forEach(input => {
+      if (input.prev_out.addr === this.state.address) {
+        this.setState({
+          total_sent: (this.state.total_sent + (input.value || 0 )),
+          final_balance: (this.state.final_balance - (input.value || 0 ))
+        });
+      }
+    });
+
+    tx.out.forEach(output => {
+      if (output.addr === this.state.address) {
+        this.setState({
+          total_received: (this.state.total_received + (output.value || 0)),
+          final_balance: (this.state.final_balance + (output.value || 0))
+        });
+      }
+    });
   }
 
   listenForTx() {
