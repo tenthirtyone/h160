@@ -1,0 +1,22 @@
+.tx-info {
+  cursor: pointer;
+  
+  table {
+    width: 100%;
+    margin-top: .5rem;
+    border-collapse: collapse;
+    tbody {
+      font-weight: 400;
+      &:nth-child(even)  {
+        background-color: #e6e6e6;
+      }
+      &:nth-child(odd)  {
+        background-color: #ffffff;
+      }
+    }
+
+    &.hidden {      
+      display: none;
+    }
+  }
+}

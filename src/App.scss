@@ -1,0 +1,36 @@
+body {                
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh; 
+}
+
+main {
+  flex: 1;
+  min-height: calc(100vh - 10rem);
+  padding: 2rem 0rem
+}
+
+.App {
+  .container {          
+    margin: auto;            
+  }
+  @media (min-width: 768px) {
+      .container {
+      width: 750px;
+      }
+  }
+  @media (min-width: 992px) {
+      .container {
+      width: 970px;
+      }
+  }
+  @media (min-width: 1200px) {
+      .container {
+      width: 1170px;
+      }
+  }
+}

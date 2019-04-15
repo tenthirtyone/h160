@@ -1,0 +1,65 @@
+.Address {
+    padding: 1rem;
+    @keyframes spinner {
+        to {transform: rotate(360deg);}
+      }
+       
+    canvas {
+        display: block;
+        margin: auto;
+    }
+        
+    .spinner-box {
+        .spinner:before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 125px;
+            height: 125px;
+            margin-top: -10px;
+            margin-left: -10px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            border-top-color: #000;
+            animation: spinner .6s linear infinite;
+        }
+    }
+
+    
+
+    h2 {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .error {
+        text-align: center;
+        color: #cc2222;
+        font-weight: 900;
+    }
+
+    .tx-list {
+        table {
+            min-width: 65%;
+            
+        }    
+    }
+
+    @media (min-width: 768px) {
+       h2 {
+           font-size: 1.5rem;
+       }
+
+       .tx-item {
+           width: 100%;
+       }
+    }
+    @media (min-width: 992px) {
+       
+    }
+    @media (min-width: 1200px) {
+       
+    }
+}

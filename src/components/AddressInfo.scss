@@ -1,0 +1,39 @@
+#AddressInfo {
+  
+    table {        
+        margin: auto;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: .8rem;
+        td { 
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        border: solid 1px #efefef;
+
+        tr:nth-child(odd) {
+            background-color: #efefef;
+        }
+        td:first-of-type {
+            font-weight: 900;
+            font-size: .8rem;
+        }
+    }
+
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+       table {
+           td {
+               display: table-cell;
+           }
+        }
+    }
+    @media (min-width: 992px) {
+       
+    }
+    @media (min-width: 1200px) {
+       
+    }
+}
