@@ -114,7 +114,6 @@ class App extends Component {
     ws.onmessage = tx => {
       const { x } = tx;
       this.addTransaction(x);
-      // Increase offset
       this.setState({
         offset: this.state.offset + 1
       })
