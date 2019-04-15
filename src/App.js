@@ -30,7 +30,7 @@ class App extends Component {
     }
   }
 
-  onSearch = async (address) => {
+  onSearch = async (address) => {    
     await this.setState({
       address: address,
       isHome: false,
@@ -59,7 +59,8 @@ class App extends Component {
         address: "",
         pageIsLoaded: true,
         hasAddressData: false,
-        error: true
+        error: true,
+        txs: []
       })
     }        
     
@@ -104,24 +105,25 @@ class App extends Component {
     }
     const ws = new WebSocket(socketAPI)
 
-    ws.onopen = () => {   
-      this.state.ws.send({
+    ws.onopen = (socket) => {    
+      ws.send(`{"op":"ping"}`)      
+      ws.send(`{
         "op":"addr_sub", 
-        "addr":this.state.address
-      });      
+        "addr":"${this.state.address}"
+      }`)
     }
 
-    ws.onerror = () => {
-      // Fail silently on socket error      
-    }
-
-    ws.onmessage = tx => {
-      const { x } = tx;
-      this.addTransaction(x);
-      // Increase offset
+    ws.onmessage = event => {      
+      let { data } = event;      
+      data = JSON.parse(data);
+      
+      if (data && data.x) {
+        this.addTransaction(data.x);
+      } 
+            
       this.setState({
         offset: this.state.offset + 1
-      })
+      })  
     }    
 
     this.setState({

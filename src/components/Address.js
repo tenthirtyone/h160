@@ -56,7 +56,6 @@ function Spinner({ pageIsLoaded }) {
   return null;
 }
 
-
 Address.propTypes = {
   isAddress: PropTypes.bool,
   error: PropTypes.bool,
