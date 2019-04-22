@@ -171,7 +171,6 @@ class App extends Component {
             searchAddress={this.searchAddress}            
             getMoreTx={this.getMoreTx}
             hasMoreTx={this.state.offset < this.state.n_tx - this.state.pageSize}/>}  />
-            
           
         <Footer></Footer>  
       </div>
