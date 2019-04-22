@@ -198,6 +198,10 @@ class App extends Component {
         <Route exact path="/" 
           render={(props) => <Home {...props}             
             searchAddress={this.searchAddress}/> } />
+          
+        <Route exact path="/h160" 
+          render={(props) => <Home {...props}             
+            searchAddress={this.searchAddress}/> } />
             
         <Route path="/address/:addr"
           render={(props) => <Address {...props}
