@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { create } from "react-test-renderer";
 import TxInfo from './TxInfo';
-import tx from '../../mocks/tx';
+import tx from '../../../mocks/tx';
 
 describe('H160', () => {
   it('renders without crashing ', () => {

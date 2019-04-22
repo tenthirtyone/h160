@@ -14,7 +14,7 @@ export default class SearchBox extends Component {
   }
 
   handleSearch = () => {
-    this.props.onSearch(this.getInputValue());
+    this.props.searchAddress(this.getInputValue());
   }
 
   render() {
@@ -29,7 +29,7 @@ export default class SearchBox extends Component {
 }
 
 SearchBox.propTypes = {
-  onSearch: PropTypes.func,
+  searchAddress: PropTypes.func,
   value: PropTypes.string,
   placeholderText: PropTypes.string
 };

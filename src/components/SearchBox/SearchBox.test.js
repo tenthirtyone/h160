@@ -22,9 +22,9 @@ describe('Address', () => {
     expect(instance.props.value).toBe("Search Value");    
   });
   it('passes the search value on enter', () => {    
-    const component = create(<SearchBox onSearch={(addr) => addr}/>);
+    const component = create(<SearchBox searchAddress={(addr) => addr}/>);
     const instance = component.getInstance();    
-    const someAddress = instance.props.onSearch(testAddress);
+    const someAddress = instance.props.searchAddress(testAddress);
     expect(someAddress).toBe(testAddress);
   });
 });

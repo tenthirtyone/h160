@@ -7,7 +7,7 @@ export default class AddressInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      qrSize: 150
+      qrSize: 200
     };
   }  
   render() {             
@@ -17,7 +17,7 @@ export default class AddressInfo extends Component {
           <div>
             <QRCode
               size={this.state.qrSize}
-              value={`https://www.blockchain.com/btc/address/${this.props.address}`} />,
+              value={`${this.props.address}`} />,
           </div>        
           <div>                
             <table>      

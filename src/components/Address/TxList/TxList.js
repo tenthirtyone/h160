@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TxInfo from './TxInfo';
+import TxInfo from './TxInfo/TxInfo';
 import PropTypes from 'prop-types';
 import './TxList.scss';
 

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import Address from './components/Address';
+import { Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Home from './components/Home/Home';
+import Address from './components/Address/Address';
+import { withRouter } from "react-router";
+import PropTypes from 'prop-types';
 import './App.scss';
 
 const addressAPI = 'https://blockchain.info/rawaddr/';
@@ -21,8 +24,6 @@ class App extends Component {
       txs: [],
       pageSize: 10,
       offset: 0,
-      isHome: true,
-      isAddress: false,
       pageIsLoaded: true,
       hasAddressData: false,
       error: false,
@@ -30,28 +31,28 @@ class App extends Component {
     };
   }
 
-  onSearch = async (address) => {    
+  searchAddress = async (address) => {    
+    this.props.history.push(`/address/${address}`);
+    
     await this.setState({
       address: address,
-      isHome: false,
       pageIsLoaded: false,
       hasAddressData: false,
-      isAddress: true,
       error: false,
       offset: 0,
       txs: []
     });
 
-    this.getAddressTxs();
+    this.getTxsForAddress();
     this.listenForTx();
   }
 
-  getAddressTxs = async () => {
+  getTxsForAddress = async (address = this.state.address) => {
     let response;
     let json;
 
     try {
-      const endpoint = `${this.state.address}?cors=true&limit=${this.state.pageSize}&offset=${this.state.offset}`;
+      const endpoint = `${address}?cors=true&limit=${this.state.pageSize}&offset=${this.state.offset}`;
       response = await fetch(`${addressAPI}${endpoint}`);
       json = await response.json();
     } catch (e) {                              
@@ -82,7 +83,7 @@ class App extends Component {
     }); 
     
     if (this.state.offset <= this.state.n_tx - this.state.pageSize) {      
-      this.getAddressTxs();
+      this.getTxsForAddress();
       this.setState({
         pageIsLoaded: false
       });
@@ -157,24 +158,30 @@ class App extends Component {
     return (
       <div className="App">
         <Header 
-          onSearch={this.onSearch}
-          address={this.state.address}></Header>
-        <Home
-          isHome={this.state.isHome}
-          onSearch={this.onSearch}          
-        ></Home>
-        <Address 
-          {...this.state}
-          isAddress={this.state.isAddress}
           searchAddress={this.searchAddress}
-          getMoreTx={this.getMoreTx}
-          hasMoreTx={this.state.offset < this.state.n_tx - this.state.pageSize}
-        ></Address>  
+          address={this.state.address}></Header>
+          
+        <Route exact path="/" 
+          render={(props) => <Home {...props}             
+            searchAddress={this.searchAddress}/> } />
+            
+        <Route path="/address/:addr"
+          render={(props) => <Address {...props}
+            {...this.state}
+            searchAddress={this.searchAddress}            
+            getMoreTx={this.getMoreTx}
+            hasMoreTx={this.state.offset < this.state.n_tx - this.state.pageSize}/>}  />
+            
+          
         <Footer></Footer>  
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
 
+
+Home.propTypes = {
+  historay: PropTypes.array
+};
