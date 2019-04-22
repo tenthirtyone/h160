@@ -8,7 +8,8 @@ export default class AddressInfo extends Component {
     super(props);
     this.state = {
       qrSize: 200
-    };
+    };    
+   
   }  
   render() {             
     if (this.props.hasAddressData) {
@@ -46,6 +47,14 @@ export default class AddressInfo extends Component {
                   <td>Total Sent:</td>
                   <td>{this.props.total_sent}</td>
                 </tr>
+                <tr>
+                  <td>USD Value:</td>
+                  <td>                
+                    {<AccountValue 
+                      final_balance={this.props.final_balance} 
+                      spotPrice={this.props.spotPrice}/>
+                    }</td>
+                </tr>
               </tbody>              
             </table>
           </div>
@@ -57,6 +66,10 @@ export default class AddressInfo extends Component {
   }
 }
 
+function AccountValue({ final_balance, spotPrice }) {
+  return `$ ${Math.round((final_balance / Math.pow(10, 8)) * spotPrice * 100) / 100}`;
+}
+
 AddressInfo.propTypes = {
   address: PropTypes.string,  
   hasAddressData: PropTypes.bool,
@@ -65,4 +78,5 @@ AddressInfo.propTypes = {
   n_tx: PropTypes.number,
   total_received: PropTypes.number,
   total_sent: PropTypes.number,
+  spotPrice: PropTypes.number
 };

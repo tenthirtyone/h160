@@ -7,9 +7,13 @@ import './Address.scss';
 export default class Address extends Component { 
   constructor(props) {
     super(props);
-    if (!props.hasAddressData) {
-      props.searchAddress(props.match.params.addr);
-    }
+    props.getTxData(props.match.params.addr);   
+  }
+
+  componentDidUpdate(){
+    window.onpopstate  = () => {
+      this.props.getTxData(this.props.match.params.addr);
+    };  
   }
 
   render() {                            
@@ -30,11 +34,13 @@ export default class Address extends Component {
             final_balance={this.props.final_balance}
             n_tx={this.props.n_tx}
             total_received={this.props.total_received}
-            total_sent={this.props.total_sent}/>
+            total_sent={this.props.total_sent}
+            spotPrice={this.props.spotPrice}/>
                 
           <TxList 
             getMoreTx={this.props.getMoreTx}
             hasMoreTx={this.props.hasMoreTx}
+            spotPrice={this.props.spotPrice}
             txs={this.props.txs}/>
 
         </div>                
@@ -73,8 +79,9 @@ Address.propTypes = {
   getMoreTx: PropTypes.func,
   hasMoreTx: PropTypes.bool,
   txs: PropTypes.array,
+  spotPrice: PropTypes.number,
   didError: PropTypes.bool,
-  searchAddress: PropTypes.func
+  getTxData: PropTypes.func
 };
 
 ErrorMsg.propTypes = {

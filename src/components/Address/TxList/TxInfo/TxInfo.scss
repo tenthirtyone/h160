@@ -1,5 +1,10 @@
 .tx-info {
-  cursor: pointer;
+  div {
+    cursor: pointer;
+    .tx-price {
+      float: right;
+    }
+  }
   
   table {
     width: 100%;

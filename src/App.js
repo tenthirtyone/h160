@@ -53,24 +53,30 @@ class App extends Component {
     if (json.data && json.data.amount) {
       const { amount } = json.data;
       
-      this.setState({
-        spotPrice: amount
-      });
+      const decimalPlaces = (amount.length - 1) - amount.indexOf('.');
+
+      await this.setState({
+        spotPrice: parseInt(amount.replace('.', ''), 10) / Math.pow(10, decimalPlaces)
+      });      
     }
   }
 
   searchAddress = async (address) => {    
-    this.props.history.push(`/address/${address}`);
-    
-    await this.setState({
-      address: address,
+    if (this.props.history.location !== `/address/${address}`) {
+      this.props.history.push(`/address/${address}`);
+      this.getTxData(address);
+    }            
+  }
+
+  getTxData = async (address) => {    
+    await this.setState({   
+      address: address,   
       pageIsLoaded: false,
       hasAddressData: false,
       error: false,
       offset: 0,
       txs: []
     });
-
     this.getTxsForAddress();
     this.listenForTx();
   }
@@ -196,7 +202,8 @@ class App extends Component {
         <Route path="/address/:addr"
           render={(props) => <Address {...props}
             {...this.state}
-            searchAddress={this.searchAddress}            
+            getTxData={this.getTxData} 
+            spotPrice={this.state.spotPrice}           
             getMoreTx={this.getMoreTx}
             hasMoreTx={this.state.offset < this.state.n_tx - this.state.pageSize}/>}  />
           

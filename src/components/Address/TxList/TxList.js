@@ -11,7 +11,7 @@ export default class TxList extends Component {
         <div id="TxList">         
           <small>Click a tx to view more info...</small> 
           { this.props.txs.map((tx) =>             
-            <TxInfo key={tx.hash} tx={tx}/>  
+            <TxInfo key={tx.hash} tx={tx} spotPrice={this.props.spotPrice}/>  
           ) }  
           <MoreTx 
             hasMoreTx={this.props.hasMoreTx}  
@@ -38,6 +38,7 @@ function MoreTx({ hasMoreTx, getMoreTx })  {
 
 TxList.propTypes = {
   txs: PropTypes.array,
+  spotPrice: PropTypes.number,
   hasMoreTx: PropTypes.bool,
   getMoreTx: PropTypes.func
 };

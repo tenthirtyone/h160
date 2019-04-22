@@ -23,41 +23,18 @@ export default class TxInfo extends Component {
   }
 
   render() {
-    if (this.props.tx) {
+    if (this.props.tx) {      
       return (
-        <div className="tx-info item" onClick={this.toggleDisplay}>
-          <div>
+        <div className="tx-info item">
+          <div onClick={this.toggleDisplay}>
+            <div className="tx-price">
+              <TxValue inputs={this.props.tx.inputs} spotPrice={this.props.spotPrice}/>
+            </div>
             {this.props.tx.hash || ''}
           </div>        
+
           <table className={this.state.display}>                
-            { this.props.tx.out.map(output => 
-              <tbody key={output.script}>
-                <tr>
-                  <td>
-                        address:
-                  </td>
-                  <td>
-                    {output.addr}
-                  </td>
-                </tr>
-                <tr>                      
-                  <td>
-                        script:
-                  </td>
-                  <td>
-                    {output.script}
-                  </td>
-                </tr>
-                <tr>                      
-                  <td>
-                        value:
-                  </td>
-                  <td>
-                    {output.value}
-                  </td>
-                </tr>
-              </tbody>
-            )}                
+            <OutputDetails outputs={this.props.tx.out} spotPrice={this.props.spotPrice} />
           </table>
         </div>    
       );
@@ -68,6 +45,53 @@ export default class TxInfo extends Component {
   }
 }
 
+function OutputDetails({ outputs }) {
+  return (
+    outputs.map(output => 
+      <tbody key={output.script}>
+        <tr>
+          <td>
+                address:
+          </td>
+          <td>
+            {output.addr}
+          </td>
+        </tr>
+        <tr>                      
+          <td>
+                script:
+          </td>
+          <td>
+            {output.script}
+          </td>
+        </tr>
+        <tr>                      
+          <td>
+                BTC:
+          </td>
+          <td>
+            {output.value}
+          </td>
+        </tr>
+      </tbody>
+    )
+  );
+}
+
+function SpotPriceUSD(satoshis, spotPrice) {   
+  return `$ ${Math.round((satoshis / Math.pow(10, 8)) * spotPrice * 100) / 100}`; 
+}
+
+function TxValue({ inputs, spotPrice }) {
+  let satoshis = 0;
+  inputs.forEach(input => {
+    satoshis += input.prev_out.value;
+  });
+  
+  return SpotPriceUSD(satoshis, spotPrice);
+}
+
 TxInfo.propTypes = {
-  tx: PropTypes.object
+  tx: PropTypes.object,
+  spotPrice: PropTypes.number
 };
