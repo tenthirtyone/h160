@@ -10,6 +10,7 @@ import './App.scss';
 
 const addressAPI = 'https://blockchain.info/rawaddr/';
 const socketAPI = 'wss://ws.blockchain.info/inv';
+const priceAPI = 'https://api.coinbase.com/v2/prices/spot?currency=USD';
 
 class App extends Component {
   constructor(props) {
@@ -26,9 +27,36 @@ class App extends Component {
       offset: 0,
       pageIsLoaded: true,
       hasAddressData: false,
+      spotPrice: null,
       error: false,
       ws: null
     };
+    
+    this.getSpotPrice();
+    setInterval(() => {
+      this.getSpotPrice();
+    }, 60 * 1000);
+  }
+
+  getSpotPrice = async () => {
+    let response;
+    let json;
+    try {      
+      response = await fetch(`${priceAPI}`);
+      json = await response.json();
+    } catch (e) {                              
+      this.setState({
+        spotPrice: null
+      });
+    }    
+    
+    if (json.data && json.data.amount) {
+      const { amount } = json.data;
+      
+      this.setState({
+        spotPrice: amount
+      });
+    }
   }
 
   searchAddress = async (address) => {    
@@ -159,7 +187,7 @@ class App extends Component {
       <div className="App">
         <Header 
           searchAddress={this.searchAddress}
-          address={this.state.address}></Header>
+          address={this.state.address}/>
           
         <Route exact path="/" 
           render={(props) => <Home {...props}             
@@ -172,7 +200,8 @@ class App extends Component {
             getMoreTx={this.getMoreTx}
             hasMoreTx={this.state.offset < this.state.n_tx - this.state.pageSize}/>}  />
           
-        <Footer></Footer>  
+        <Footer 
+          spotPrice={this.state.spotPrice}/>  
       </div>
     );
   }
@@ -180,7 +209,6 @@ class App extends Component {
 
 export default withRouter(App);
 
-
-Home.propTypes = {
-  historay: PropTypes.array
+App.propTypes = {
+  history: PropTypes.object
 };

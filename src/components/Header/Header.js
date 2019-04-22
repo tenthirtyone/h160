@@ -11,7 +11,7 @@ export default class Header extends Component {
         <div className="container">                   
           <span>
             <Link to="/"> H160 </Link>
-          </span>                    
+          </span>                           
           <SearchBox 
             searchAddress={this.props.searchAddress}
             placeholderText="Enter a Bitcoin Address"/>
@@ -21,5 +21,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  searchAddress: PropTypes.func,    
+  searchAddress: PropTypes.func,   
+  spotPrice: PropTypes.string 
 };
