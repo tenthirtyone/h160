@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { create } from "react-test-renderer";
 import AddressInfo from './AddressInfo';
-import address from '../../../mocks/addr';
+import address from '../../../../mocks/addr';
 
 describe('Address', () => {
   it('renders without crashing', () => {
@@ -39,6 +39,6 @@ describe('Address', () => {
       total_sent={address.total_sent}/>);
     const instance = component.getInstance();    
     
-    expect(instance.state.qrSize).toBe(150);
+    expect(instance.state.qrSize).toBe(200);
   });
 });

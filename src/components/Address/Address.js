@@ -7,7 +7,9 @@ import './Address.scss';
 export default class Address extends Component { 
   constructor(props) {
     super(props);
-    props.getTxData(props.match.params.addr);   
+    if (props.match && props.match.addr) {
+      props.getTxData(props.match.params.addr);   
+    }
   }
 
   componentDidUpdate(){
@@ -20,8 +22,7 @@ export default class Address extends Component {
     return (                        
       <main className="Address">                            
         <ErrorMsg 
-          didError={this.props.error}
-          address={this.props.match.params.addr}/>
+          didError={this.props.error}/>
         <div className="container">                    
           
           <Spinner 
